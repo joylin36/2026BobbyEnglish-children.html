@@ -162,9 +162,6 @@
                     </div>
                     <div><label style="cursor: pointer;"><input type="checkbox" id="summerPM" onchange="calculateTuition()"> 加購下午英文複習班 (1:30-4:30p.m.)</label></div>
                 </div>
-                <div style="font-size: 11px; color: #555; margin-top: 10px;">
-                    💡 備註：單選1-2週為每週 $4,500；滿3週以上全期自動享有8折優惠價每週 $3,600[cite: 1] (加購下午班另計)[cite: 1]。
-                </div>
             </div>
 
             <div class="offer-box" id="calcPreview">請選擇上方課程，巴比核心大腦將為您實時計算當期總費用。</div>
@@ -180,7 +177,7 @@
             <h2 class="terms-header">報名需知與家長同意條款<br><span style="font-size: 14px; font-weight: normal;">Terms & Conditions</span></h2>
             <div class="privacy-statement"><strong>個資保護聲明 / Privacy Statement：</strong>本個人資料僅供課程聯繫與行政管理使用，符合個資法規範。</div>
             <div class="terms-list">
-                <div class="term-item"><strong>1. 審閱權與退費規定 Refund Policy：</strong>依據「桃園市短期補習班退費管理自治條例」規定辦理。開課前30日前退全額；開課後依比例退還。[cite: 1]</div>
+                <div class="term-item"><strong>1. 審閱權與退費規定 Refund Policy：</strong>依據「桃園市短期補習班退費管理自治條例」規定辦理。開課前30日前退全額；開課後依比例退還。</div>
                 <div class="term-item"><strong>2. 請假與補課 Leave & Make-up：</strong>因故缺席者請於上課前兩小時請假，本班將排定補課輔導。</div>
                 <div class="term-item"><strong>3. 安全與公共責任 Safety：</strong>下課後請家長按時前來接送。本班公共安全與保險均符合法令規範。</div>
             </div>
@@ -195,7 +192,7 @@
 </div>
 
 <script>
-const courseDatabase = {
+var courseDatabase = {
     "Let's Go 1": { time: "每週一、三、五 1:30 PM - 3:30 PM", lessons: 51, price: 620, materials: 1268, misc: 60 },
     "Let's Go 2": { time: "每週一、三、五 1:30 PM - 3:30 PM", lessons: 51, price: 620, materials: 1268, misc: 60 },
     "Let's Go 3": { time: "週一 4:30-6:30 PM & 週三、五 1:30-3:30 PM", lessons: 51, price: 620, materials: 1572, misc: 60 },
@@ -205,15 +202,15 @@ const courseDatabase = {
 };
 
 function calculateTuition() {
-    const courseKey = document.getElementById('courseSelect').value;
-    const timeDisplay = document.getElementById('timeDisplay');
-    const calcPreview = document.getElementById('calcPreview');
-    const totalInput = document.getElementById('total_amount');
-    const summerBox = document.getElementById('summerConfigBox');
-    const discountRow = document.getElementById('standardDiscountRow');
+    var courseKey = document.getElementById('courseSelect').value;
+    var timeDisplay = document.getElementById('timeDisplay');
+    var calcPreview = document.getElementById('calcPreview');
+    var totalInput = document.getElementById('total_amount');
+    var summerBox = document.getElementById('summerConfigBox');
+    var discountRow = document.getElementById('standardDiscountRow');
 
-    let discountRate = 1.0;
-    const activeRadio = document.querySelector('input[name="discount_plan"]:checked');
+    var discountRate = 1.0;
+    var activeRadio = document.querySelector('input[name="discount_plan"]:checked');
     if (activeRadio) { discountRate = parseFloat(activeRadio.value); }
 
     if (!courseKey) {
@@ -225,13 +222,13 @@ function calculateTuition() {
 
     if (courseKey === "2026 暑期班") {
         summerBox.style.display = "block"; discountRow.style.opacity = "0.4";
-        const weeks = parseInt(document.getElementById('summerWeeks').value);
-        const hasPM = document.getElementById('summerPM').checked;
-        let baseRate = (weeks >= 3) ? 3600 : 4500;
-        let pmRate = (weeks >= 3) ? 1800 : 1912;
-        let tuitionTotal = baseRate * weeks;
-        let pmTotal = hasPM ? (pmRate * weeks) : 0;
-        let finalTotal = tuitionTotal + pmTotal;
+        var weeks = parseInt(document.getElementById('summerWeeks').value);
+        var hasPM = document.getElementById('summerPM').checked;
+        var baseRate = (weeks >= 3) ? 3600 : 4500;
+        var pmRate = (weeks >= 3) ? 1800 : 1912;
+        var tuitionTotal = baseRate * weeks;
+        var pmTotal = hasPM ? (pmRate * weeks) : 0;
+        var finalTotal = tuitionTotal + pmTotal;
 
         document.getElementById('class_time').value = "每週二、三、四 早上 9:00-12:00a.m.";
         document.getElementById('sub_tuition').value = tuitionTotal;
@@ -242,39 +239,39 @@ function calculateTuition() {
         totalInput.value = finalTotal;
 
         timeDisplay.innerText = "每週二、三、四 早上 9:00-12:00a.m.";
-        let offerText = (weeks >= 3) ? "<span style='color:red;'>(滿3週已自動打8折每週$3600)</span>" : "(常態1-2週每週$4500)";
-        calcPreview.innerHTML = `☀️ <b>2026 暑期營計費細項 ${offerText}</b>：<br>早上密集班費用：$${baseRate} × ${weeks}週 = $${tuitionTotal}${hasPM ? ` | 下午複習班：$${pmRate} × ${weeks}週 = $${pmTotal}` : ""}<br>👉 <b>應繳總金額：NT$ ${finalTotal} 元</b>`;
+        var textOffer = (weeks >= 3) ? "滿3週已自動打8折每週$3600" : "常態1-2週每週$4500";
+        calcPreview.innerHTML = "☀️ <b>2026 暑期營計費細項 (" + textOffer + ")</b>：<br>早上密集班費用：$" + tuitionTotal + (hasPM ? " | 下午複習班：" + pmTotal : "") + "<br>👉 <b>應繳總金額：NT$ " + finalTotal + " 元</b>";
         return;
     }
 
     summerBox.style.display = "none"; discountRow.style.opacity = "1";
 
     if (courseDatabase[courseKey]) {
-        const course = courseDatabase[courseKey];
+        var course = courseDatabase[courseKey];
         document.getElementById('class_time').value = course.time;
-        const tuitionTotal = course.price * course.lessons;
-        const materialsTotal = course.materials;
-        const miscTotal = course.misc * course.lessons;
-        const finalTotal = Math.round((tuitionTotal + miscTotal) * discountRate + materialsTotal);
+        var tuitionTotal = course.price * course.lessons;
+        var materialsTotal = course.materials;
+        var miscTotal = course.misc * course.lessons;
+        var finalTotal = Math.round((tuitionTotal + miscTotal) * discountRate + materialsTotal);
 
         document.getElementById('sub_tuition').value = tuitionTotal;
         document.getElementById('sub_materials').value = materialsTotal;
         document.getElementById('sub_misc').value = miscTotal;
         totalInput.value = finalTotal;
         timeDisplay.innerText = course.time;
-        calcPreview.innerHTML = `📚 <b>${courseKey} 費用拆解明細</b>：<br>基本學費：$${course.price} × ${course.lessons}堂 | 教材費：$${materialsTotal} | 學雜費：$${miscTotal}<br>👉 <b>實際總計金額：NT$ ${finalTotal} 元</b>`;
+        calcPreview.innerHTML = "📚 <b>" + courseKey + " 費用拆解明細</b>：<br>基本學費：$" + tuitionTotal + " | 教材費：$" + materialsTotal + " | 學雜費：$" + miscTotal + "<br>👉 <b>實際總計金額：NT$ " + finalTotal + " 元</b>";
     }
 }
 
 function showImagePreview(input) {
-    const container = document.getElementById('photoContainer');
+    var container = document.getElementById('photoContainer');
     if (input.files && input.files[0]) {
-        const reader = new FileReader();
+        var reader = new FileReader();
         reader.onload = function(e) {
             document.getElementById('uploadText').style.display = 'none';
-            const oldImg = container.querySelector('.preview-img');
+            var oldImg = container.querySelector('.preview-img');
             if (oldImg) oldImg.remove();
-            const img = document.createElement('img'); img.src = e.target.result; img.className = 'preview-img'; container.appendChild(img);
+            var img = document.createElement('img'); img.src = e.target.result; img.className = 'preview-img'; container.appendChild(img);
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -282,15 +279,15 @@ function showImagePreview(input) {
 
 document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const form = this;
-    const submitBtn = document.getElementById('submitBtn');
+    var form = this;
+    var submitBtn = document.getElementById('submitBtn');
     if (submitBtn) { submitBtn.disabled = true; submitBtn.innerText = "正在同步巴比核心 14 欄雲端資料..."; }
     
-    const formElements = form.elements;
-    const params = new URLSearchParams();
-    const baseUrl = window.location.origin + window.location.pathname;
-    for (let i = 0; i < formElements.length; i++) {
-        const el = formElements[i];
+    var formElements = form.elements;
+    var params = new URLSearchParams();
+    var baseUrl = window.location.origin + window.location.pathname;
+    for (var i = 0; i < formElements.length; i++) {
+        var el = formElements[i];
         if (!el.name || el.type === 'file' || el.type === 'submit' || el.name.startsWith('_')) continue;
         if (el.type === 'radio') { if (el.checked) params.append(el.name, el.value); }
         else { if (el.value) params.append(el.name, el.value); }
@@ -298,19 +295,19 @@ document.getElementById('enrollmentForm').addEventListener('submit', function(e)
     params.append('auto_print', 'true');
     document.getElementById('printLinkInput').value = baseUrl + '?' + params.toString();
 
-    const googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbxt07hF-qkXePULEBjuCpzdWnaeNWsTlQV7dRhch_iBwtVePOIJzldTAsR0LothoQ1l/exec";
+    var googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbxt07hF-qkXePULEBjuCpzdWnaeNWsTlQV7dRhch_iBwtVePOIJzldTAsR0LothoQ1l/exec";
     fetch(googleAppsScriptUrl, { method: 'POST', body: new URLSearchParams(new FormData(form)) })
-    .then(() => { alert("🎉 兒童報名表校正成功！最純淨的選項已完美上架雲端！"); form.submit(); })
-    .catch(() => { form.submit(); });
+    .then(function() { alert("🎉 兒童報名表校正成功！最純淨的選項已完美上架雲端！"); form.submit(); })
+    .catch(function() { form.submit(); });
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    const teacherDateInput = document.getElementsByName('teacher_sig_date')[0];
-    if(teacherDateInput) teacherDateInput.value = `${yyyy}-${mm}-${dd}`;
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var dd = String(today.getDate()).padStart(2, '0');
+    var teacherDateInput = document.getElementsByName('teacher_sig_date')[0];
+    if(teacherDateInput) teacherDateInput.value = yyyy + '-' + mm + '-' + dd;
 });
 </script>
 </body>
