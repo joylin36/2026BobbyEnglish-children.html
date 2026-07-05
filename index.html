@@ -743,4 +743,71 @@ function calculateTuition() {
         if (discountRate === 0.8) discountLabel = " <span style='color:red;'>(尊榮老朋友8折優惠)</span>";
 
         calcPreview.innerHTML = "📚 <b>" + courseKey + " 費用拆解明細" + discountLabel + "</b>：<br>" +
-                                "基本學費：$" + course.price + " × " + course.lessons + "堂 = $" + tuitionTotal +
+                                "基本學費：$" + course.price + " × " + course.lessons + "堂 = $" + tuitionTotal + " | " +
+                                "固定教材費：$" + materialsTotal + " | " +
+                                "學雜費：$" + course.misc + " × " + course.lessons + "堂 = $" + miscTotal + "<br>" +
+                                "👉 <b>應繳實際總計金額：NT$ " + finalTotal + " 元</b>";
+    }
+}
+
+function showImagePreview(input) {
+    var container = document.getElementById('photoContainer');
+    var uploadText = document.getElementById('uploadText');
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            uploadText.style.display = 'none';
+            var oldImg = container.querySelector('.preview-img');
+            if (oldImg) oldImg.remove();
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'preview-img';
+            container.appendChild(img);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    var form = this;
+    var submitBtn = document.getElementById('submitBtn');
+    
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "正在同步巴比核心 14 欄雲端資料...";
+    }
+    
+    var params = new URLSearchParams();
+    var baseUrl = window.location.origin + window.location.pathname;
+    var formElements = form.elements;
+    
+    for (var i = 0; i < formElements.length; i++) {
+        var el = formElements[i];
+        if (!el.name || el.type === 'file' || el.type === 'submit' || el.name.startsWith('_')) continue;
+        if (el.type === 'radio') {
+            if (el.checked) params.append(el.name, el.value);
+        } else {
+            if (el.value) params.append(el.name, el.value);
+        }
+    }
+    params.append('auto_print', 'true');
+    document.getElementById('printLinkInput').value = baseUrl + '?' + params.toString();
+    
+    var googleAppsScriptUrl = "https://script.google.com/macros/s/AKfycbxt07hF-qkXePULEBjuCpzdWnaeNWsTlQV7dRhch_iBwtVePOIJzldTAsR0LothoQ1l/exec";
+    
+    fetch(googleAppsScriptUrl, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(form))
+    })
+    .then(function() {
+        alert("🎉 巴比美語：兒童獨立版．核心 14 欄位資料同步成功！");
+        form.submit(); 
+    })
+    .catch(function() {
+        form.submit();
+    });
+});
+</script>
+</body>
+</html>
