@@ -142,9 +142,9 @@
             color: var(--uci-blue);
             text-align: center; 
             width: 18%;
-            font-size: 11px;
-            line-height: 1.3;
+            line-height: 1.4;
             font-weight: bold;
+            padding: 6px 4px;
         }
 
         th span.zh-title {
@@ -404,7 +404,7 @@
 <div class="page-container">
     <form id="enrollmentForm" action="https://formsubmit.co/bobbyenglishschool@gmail.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="【兒童美語線上報名】巴比美語萬能表單填報通知">
+        <input type="hidden" name="_subject" value="【兒童美語線上報名】巴比美語萬表單填報通知">
         <input type="hidden" id="printLinkInput" name="查看並印出完整A4報名表" value="">
 
         <input type="hidden" id="class_time" name="class_time" value="">
@@ -417,8 +417,8 @@
         <div class="page page1">
             <div class="header-section">
                 <div class="title-area">
-                    <h1 class="main-title">巴比美語補習班 ｜ 全能智慧校務報名系統</h1>
-                    <h2 class="sub-title">Bobby English School - Universal Smart Enrollment Form</h2>
+                    <h1 class="main-title">巴比美語補習班 ｜ 兒童美語暨暑期營報名系統</h1>
+                    <h2 class="sub-title">Bobby English School - Children's Regular & Summer Enrollment Form</h2>
                     <div class="contact-info">
                         <p><strong>電話 / Phone：</strong>03-2161338</p>
                         <p><strong>信箱 / E-mail：</strong>bobbyenglishschool@gmail.com</p>
@@ -453,7 +453,7 @@
                         <th><span class="zh-title">出生日期</span><span class="en-title">Date of Birth</span></th>
                         <td><input type="date" name="dob" class="text-input" required></td>
                         <th><span class="zh-title">就讀學校</span><span class="en-title">School</span></th>
-                        <td><input type="text" name="school" class="text-input" placeholder=""></td>
+                        <td><input type="text" name="school" class="text-input" placeholder="例如：莊敬國小"></td>
                         <th><span class="zh-title">年級</span><span class="en-title">Grade</span></th>
                         <td>
                             <div style="display: flex; align-items: center; justify-content: flex-start; padding: 0 8px; height: 100%;">
@@ -465,7 +465,7 @@
                         <th><span class="zh-title">家長姓名</span><span class="en-title">Parent's Name</span></th>
                         <td><input type="text" name="parent_name" class="text-input" placeholder="" required></td>
                         <th><span class="zh-title">與學生關係</span><span class="en-title">Relationship</span></th>
-                        <td><input type="text" name="relation" class="text-input" placeholder="" required></td>
+                        <td><input type="text" name="relation" class="text-input" placeholder="例如：媽媽" required></td>
                         <th><span class="zh-title">聯絡電話</span><span class="en-title">Phone Number</span></th>
                         <td><input type="tel" name="phone" class="text-input" placeholder="主要聯絡手機" required></td>
                     </tr>
@@ -473,7 +473,7 @@
                         <th><span class="zh-title">電子信箱</span><span class="en-title">E-mail</span></th>
                         <td colspan="3"><input type="email" name="email" class="text-input" placeholder=""></td>
                         <th><span class="zh-title">LINE ID</span><span class="en-title">LINE ID</span></th>
-                        <td><input type="text" name="line_id" class="text-input" placeholder="LINE ID"></td>
+                        <td><input type="text" name="line_id" class="text-input" placeholder="以便聯繫課務"></td>
                     </tr>
                     <tr>
                         <th><span class="zh-title">通訊地址</span><span class="en-title">Mailing Address</span></th>
@@ -548,28 +548,28 @@
                 請選擇上方課程，巴比核心大腦將為您實時計算當期總費用。 / Please select a course to calculate tuition.
             </div>
 
-            <div class="section-title">補習班行政確認欄 Office Use Only</div>
+            <div class="section-title">預計繳費與行政確認欄 Office Use Only</div>
             <table>
                 <tbody>
                     <tr>
-                        <th><span class="zh-title">應繳總金額</span><span class="en-title">Total Amount</span></th>
+                        <th><span class="zh-title">預估總金額</span><span class="en-title">Estimated Total</span></th>
                         <td><input type="text" id="total_amount" name="total_amount" class="text-input" style="font-weight: bold; color: #c00; font-size: 16px;" placeholder="$" readonly></td>
-                        <th><span class="zh-title">付款方式</span><span class="en-title">Payment Method</span></th>
+                        <th><span class="zh-title">預計付款方式</span><span class="en-title">Expected Payment</span></th>
                         <td colspan="3">
                             <div class="payment-inline-row">
                                 <label><input type="radio" name="payment_method" value="現金" checked> 現金 Cash</label>
                                 <label>
                                     <input type="radio" name="payment_method" value="銀行轉帳"> 銀行轉帳 (後五碼)：
-                                    <input type="text" name="transfer_code" style="border: none; border-bottom: 1px solid #333; width: 75px; background: transparent; outline: none; text-align: left; padding-left: 4px; height: 25px;">
+                                    <input type="text" name="transfer_code" style="border: none; border-bottom: 1px solid #333; width: 75px; background: transparent; outline: none; text-align: left; padding-left: 4px; height: 25px;" placeholder="選填">
                                 </label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <th><span class="zh-title">經辦人員</span><span class="en-title">Staff Name</span></th>
-                        <td><input type="text" name="staff_name" class="text-input" value="Joy"></td>
+                        <td><input type="text" name="staff_name" class="text-input" value="" placeholder="校方專用欄位"></td>
                         <th><span class="zh-title">收據編號</span><span class="en-title">Receipt No.</span></th>
-                        <td><input type="text" name="receipt_no" class="text-input" placeholder="R-2026-XXXX"></td>
+                        <td><input type="text" name="receipt_no" class="text-input" placeholder="校方編號 (R-2026-XXXX)"></td>
                         <th><span class="zh-title">教材發放狀況</span><span class="en-title">Material Status</span></th>
                         <td>
                             <div class="radio-group">
@@ -631,14 +631,14 @@
                     </div>
                 </div>
 
-                <div class="signature-box">
+                <div class="signature-box" style="background-color: #f0f4f8; opacity: 0.85;">
                     <div class="signature-row">
-                        <span>承辦老師簽章<br>(Staff Signature)</span>
-                        <input type="text" name="teacher_signature" class="signature-input">
+                        <span style="color: #555;">承辦老師簽章<br>(Staff Signature)</span>
+                        <input type="text" name="teacher_signature" class="signature-input" placeholder="校方專用" readonly>
                     </div>
                     <div class="signature-row">
-                        <span>日期 Date</span>
-                        <input type="date" name="teacher_sig_date" class="signature-input">
+                        <span style="color: #555;">日期 Date</span>
+                        <input type="date" name="teacher_sig_date" class="signature-input" readonly>
                     </div>
                 </div>
             </div>
@@ -708,7 +708,7 @@ function calculateTuition() {
         document.getElementById('summer_pm_selected').value = hasPM ? "加購下午班" : "無加購";
         totalInput.value = finalTotal;
 
-        timeDisplay.innerText = "每週二、三、四 早上 9:00-12:00a.m.";
+        timeDisplay.innerText = "每週二、三、快 早上 9:00-12:00a.m.";
         var bonusText = hasPM ? " (含下午英文複習班：每週$" + pmRate + " × " + weeks + "週)" : "";
         var offerText = (weeks >= 3) ? "<span style='color:red;'>(已自動套用滿3週以上8折大特惠每週$3600!)</span>" : "(常態1-2週原價每週$4500)";
         
