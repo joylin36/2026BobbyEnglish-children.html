@@ -13,7 +13,7 @@
         * {
             box-shadow: none;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
         }
 
         body {
@@ -151,6 +151,7 @@
             font-size: 14px;
             display: block;
             margin-bottom: 2px;
+            font-weight: bold;
         }
         th span.en-title {
             font-size: 10px;
@@ -404,7 +405,7 @@
 <div class="page-container">
     <form id="enrollmentForm" action="https://formsubmit.co/bobbyenglishschool@gmail.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="【兒童美語線上報名】巴比美語萬表單填報通知">
+        <input type="hidden" name="_subject" value="【兒童美語線上報名】巴比美語萬能表單填報通知">
         <input type="hidden" id="printLinkInput" name="查看並印出完整A4報名表" value="">
 
         <input type="hidden" id="class_time" name="class_time" value="">
@@ -604,13 +605,13 @@
                 </div>
                 <div class="term-item">
                     <strong>3. 安全與公共責任 / Safety & Public Liability Insurance：</strong><br>
-                    為維護學生安全，下課後請家長按時前來接送。本補習班公共安全設施、消防設備以及公共意外責任險均严格符合 government 法令規範。<br>
+                    為維護學生安全，下課後請家長按時前來接送。本補習班公共安全設施、消防設備以及公共意外責任險均嚴格符合政府法令規範。<br>
                     <span style="color: #555; font-style: italic;">To ensure student safety, parents are requested to pick up their children on time after class. Our school's public safety facilities, fire safety equipment, and public liability insurance strictly comply with government laws and regulations.</span>
                 </div>
                 <div class="term-item">
-                    <strong>4. 肖像權合理授權 / Rational Portrait Rights Authorization：</strong><br>
-                    家長同意本班在節慶活動、課堂成果中進行拍照 or 錄影，合理授權作為內部成果展示與官方推廣使用，且不損及學生名譽。<br>
-                    <span style="color: #555; font-style: italic;">Parents agree to allow the school to take photos or videos during holiday activities and class presentations. This constitutes a rational authorization for internal displays and official promotional use, ensuring that student reputation is fully protected.</span>
+                    <strong>4. 肖像權合理授權 / Portrait Rights Authorization：</strong><br>
+                    家長同意本班在節慶活動、課堂成果中進行拍照或錄影，合理授權作為內部成果展示與官方推廣使用，且不損及學生名譽。<br>
+                    <span style="color: #555; font-style: italic;">Parents agree to allow the school to take photos or videos during holiday activities and class presentations. This constitutes an authorization for internal displays and official promotional use, ensuring that student reputation is fully protected.</span>
                 </div>
             </div>
 
@@ -697,7 +698,8 @@ function calculateTuition() {
         var pmRate = (weeks >= 3) ? 1800 : 1912;
         
         var tuitionTotal = baseRate * weeks;
-        var pmTotal = hasPM ? (pmRate * weeks) : 0;
+        var hasPM_bool = hasPM;
+        var pmTotal = hasPM_bool ? (pmRate * weeks) : 0;
         var finalTotal = tuitionTotal + pmTotal;
 
         document.getElementById('class_time').value = "每週二、三、四 早上 9:00-12:00a.m.";
@@ -705,11 +707,11 @@ function calculateTuition() {
         document.getElementById('sub_materials').value = pmTotal;
         document.getElementById('sub_misc').value = 0;
         document.getElementById('summer_weeks_selected').value = weeks + "週";
-        document.getElementById('summer_pm_selected').value = hasPM ? "加購下午班" : "無加購";
+        document.getElementById('summer_pm_selected').value = hasPM_bool ? "加購下午班" : "無加購";
         totalInput.value = finalTotal;
 
-        timeDisplay.innerText = "每週二、三、快 早上 9:00-12:00a.m.";
-        var bonusText = hasPM ? " (含下午英文複習班：每週$" + pmRate + " × " + weeks + "週)" : "";
+        timeDisplay.innerText = "每週二、三、四 早上 9:00-12:00a.m.";
+        var bonusText = hasPM_bool ? " (含下午英文複習班：每週$" + pmRate + " × " + weeks + "週)" : "";
         var offerText = (weeks >= 3) ? "<span style='color:red;'>(已自動套用滿3週以上8折大特惠每週$3600!)</span>" : "(常態1-2週原價每週$4500)";
         
         calcPreview.innerHTML = "☀️ <b>2026 暑期密集英語營費用拆解 " + offerText + "</b>：<br>" +
